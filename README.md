@@ -1,2 +1,2 @@
-# CreditCardAPI
+# ChargeAPI
 a credit card api
