@@ -24,10 +24,36 @@ end
 
 get '/api/charges/:id' do
 
-  Charge.find(params[:id].to_json)
+  Charge.find(params[:id]).to_json
 
 end
 
 post '/api/charges' do
-  
+
+  Charge.create({
+    :accountid => params[:accountid],
+    :name => params[:name],
+    :vendor => params[:vendor],
+    :transdate => params[:transdate],
+    :amount => params[:amount],
+    }).to_json
+
+end
+
+patch '/api/charges/:id' do
+  charge_args = {
+    :accountid => params[:accountid],
+    :name => params[:name],
+    :vendor => params[:vendor],
+    :transdate => params[:transdate],
+    :amount => params[:amount]
+    }
+
+    @charge = Charge.find(params[:id])
+    @charge.update(charge_args)
+    @charge.to_json
+end
+
+delete '/api/charges/:id' do
+  Charge.destroy(params[:id]).to_json
 end
